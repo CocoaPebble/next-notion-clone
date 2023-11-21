@@ -8,7 +8,7 @@ export const Logo = () => {
   return (
     <div className=" hidden md:flex items-center gap-x-2">
       <Image src="/logo.svg" alt="YingzhouJ" width={40} height={40} />
-      <p className={cn("font-semibold", font.className)}>Jotion</p>
+      <p className={cn("font-semibold", font.className)}>YingzhouJ</p>
     </div>
   );
 };
