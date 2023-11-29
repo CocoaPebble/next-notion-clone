@@ -15,6 +15,16 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
     );
   }
 
+  if (!isAuthenticated) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="text-3xl text-gray-500">
+          Please login to view this page
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">{children}</main>
