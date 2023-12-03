@@ -1,10 +1,18 @@
 "use client";
 
-import React, { ReactNode } from "react";
 import { useConvexAuth } from "convex/react";
-import { Spinner } from "@/components/spinner";
+import { redirect } from "next/navigation";
 
-const MainLayout = ({ children }: { children: ReactNode }) => {
+import { Spinner } from "@/components/spinner";
+// import { SearchCommand } from "@/components/search-command";
+
+import { Navigation } from "./_components/navigation";
+
+const MainLayout = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   if (isLoading) {
@@ -16,20 +24,18 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="text-3xl text-gray-500">
-          Please login to view this page
-        </div>
-      </div>
-    );
+    return redirect("/");
   }
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1">{children}</main>
+  return ( 
+    <div className="h-full flex dark:bg-[#1F1F1F]">
+      <Navigation />
+      <main className="flex-1 h-full overflow-y-auto">
+        {/* <SearchCommand /> */}
+        {children}
+      </main>
     </div>
-  );
-};
-
+   );
+}
+ 
 export default MainLayout;
