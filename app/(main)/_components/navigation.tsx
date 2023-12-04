@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronsLeft, MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { UserItem } from "./user-item";
 
 export const Navigation = () => {
   const pathname = usePathname();
@@ -98,12 +99,17 @@ export const Navigation = () => {
         <div
           onClick={toggleCollapse}
           role="button"
-          className="h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 transition"
+          className={cn(
+            "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
+            isMobile && "opacity-100"
+          )}
         >
-          <ChevronsLeft className="w-6 h-6" />
+          <ChevronsLeft className="w-6 h-6 opacity-80" />
         </div>
 
-        <div>items</div>
+        <div>
+          <UserItem />
+        </div>
         <div className="mt-4">
           <p>Documents</p>
         </div>
