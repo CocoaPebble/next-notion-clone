@@ -3,5 +3,5 @@
 Followed from video <https://www.youtube.com/watch?v=0OaDyjB9Ib8>
 Author: Code With Antonio
 
-UI: Tailwind CSS, Shadcn
+UI: Tailwind CSS, Shadcn ui
 Code Checker: Trunk check
