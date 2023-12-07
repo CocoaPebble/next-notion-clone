@@ -7,24 +7,24 @@ import { PlusCircle } from "lucide-react";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 
 export default function DocumentsPage() {
   const router = useRouter();
   const { user } = useUser();
-  // const create = useMutation(api.documents.create);
+  const create = useMutation(api.documents.create);
 
-  // const onCreate = () => {
-  //   const promise = create({ title: "Untitled", content: "" }).then((documentId) => router.push(`/documents/${documentId}`));
+  const onCreate = () => {
+    const promise = create({ title: "Untitled", userId: "userid" })
+    .then((documentId) => router.push(`/documents/${documentId}`));
 
-  //   toast.promise(promise, {
-  //     loading: "Creating document...",
-  //     success: "Document created!",
-  //     error: "Failed to create document",
-  //   });
-  // };
+    toast.promise(promise, {
+      loading: "Creating document...",
+      success: "Document created!",
+      error: "Failed to create document",
+    });
+  };
 
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-4">
