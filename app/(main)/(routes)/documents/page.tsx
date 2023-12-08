@@ -16,8 +16,8 @@ export default function DocumentsPage() {
   const create = useMutation(api.documents.create);
 
   const onCreate = () => {
-    const promise = create({ title: "Untitled", userId: "userid" })
-    .then((documentId) => router.push(`/documents/${documentId}`));
+    const promise = create({ title: "note2", userId: "user1", content: "" });
+    // .then((documentId) => router.push(`/documents/${documentId}`));
 
     toast.promise(promise, {
       loading: "Creating document...",
@@ -45,7 +45,7 @@ export default function DocumentsPage() {
       <h2 className="text-lg font-medium">
         Welcome to {user?.firstName}&apos;s Jotion
       </h2>
-      <Button>
+      <Button onClick={onCreate}>
         <PlusCircle className="h-4 w-4 mr-2" />
         Create a note
       </Button>
