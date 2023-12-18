@@ -5,9 +5,9 @@ import Image from "next/image";
 import { useUser } from "@clerk/clerk-react";
 import { PlusCircle } from "lucide-react";
 import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 
 export default function DocumentsPage() {
