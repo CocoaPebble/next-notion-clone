@@ -14,7 +14,7 @@ export const get = query({
 export const create = mutation({
   args: {
     title: v.string(),
-    userId: v.string(),
+    userId: v.optional(v.string()),
     content: v.optional(v.string()),
 
     parentDocument: v.optional(v.string()),

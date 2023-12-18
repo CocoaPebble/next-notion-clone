@@ -14,6 +14,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 // user
 import { useUser } from "@clerk/clerk-react";
@@ -53,6 +61,59 @@ export const Item = ({
 }: ItemProps) => {
   // arrow icon for expand and unexpand document
   const ArrowIcon = expanded ? ChevronDown : ChevronRight;
+
+  // user and document
+  const { user } = useUser();
+  const router = useRouter();
+  const create = useMutation(api.documents.create);
+  // const archive = useMutation(api.documents.archive);
+
+  // methods
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    // if (!user) return toast.error("Please login first");
+    // if (!id) return;
+
+    // const promise = archive({ id }).then(() => {
+    //   if (!expanded) {
+    //     onExpand?.();
+    //   }
+    // });
+
+    // toast.promise(promise, {
+    //   loading: "Archiving document...",
+    //   success: "Document archived!",
+    //   error: "Failed to archive document",
+    // });
+  }
+
+  const handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    onExpand?.();
+  }
+
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    if (!user) return toast.error("Please login first");
+    if (!id) return;
+
+    const promise = create({title: "Untitled", parentDocument: id}).then((docID) => {
+      if (!expanded) {
+        onExpand?.();
+      }
+      router.push(`/documents/${docID}`);
+    })
+
+    toast.promise(promise, {
+      loading: "Creating document...",
+      success: "Document created!",
+      error: "Failed to create document",
+    });
+  }
 
   return (
     <div
