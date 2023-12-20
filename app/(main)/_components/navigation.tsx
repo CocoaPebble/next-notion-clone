@@ -95,7 +95,7 @@ export const Navigation = () => {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: "New Document", userId: "1" });
+    const promise = create({ title: "New Document" });
 
     toast.promise(promise, {
       loading: "Creating document...",

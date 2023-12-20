@@ -32,7 +32,7 @@ import { api } from "@/convex/_generated/api";
 import { useMutation } from "convex/react";
 
 interface ItemProps {
-  // interaction button
+  // function button
   label: string;
   onClick: () => void;
   icon: LucideIcon;
@@ -66,15 +66,13 @@ export const Item = ({
   const { user } = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
-  // const archive = useMutation(api.documents.archive);
+  const archive = useMutation(api.documents.archive);
 
   // methods
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
-    event.preventDefault();
 
-    // if (!user) return toast.error("Please login first");
-    // if (!id) return;
+    if (!id) return;
 
     // const promise = archive({ id }).then(() => {
     //   if (!expanded) {
@@ -87,33 +85,37 @@ export const Item = ({
     //   success: "Document archived!",
     //   error: "Failed to archive document",
     // });
-  }
+  };
 
-  const handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleExpand = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.stopPropagation();
     onExpand?.();
-  }
+  };
 
   const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     event.preventDefault();
-    
+
     if (!user) return toast.error("Please login first");
     if (!id) return;
 
-    const promise = create({title: "Untitled", parentDocument: id}).then((docID) => {
-      if (!expanded) {
-        onExpand?.();
+    const promise = create({ title: "Untitled", parentDocument: id }).then(
+      (docID) => {
+        if (!expanded) {
+          onExpand?.();
+        }
+        router.push(`/documents/${docID}`);
       }
-      router.push(`/documents/${docID}`);
-    })
+    );
 
     toast.promise(promise, {
       loading: "Creating document...",
       success: "Document created!",
       error: "Failed to create document",
     });
-  }
+  };
 
   return (
     <div
