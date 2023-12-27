@@ -16,7 +16,7 @@ export default function DocumentsPage() {
   const create = useMutation(api.documents.create);
 
   const onCreate = () => {
-    const promise = create({ title: "note2", userId: "user1", content: "" });
+    const promise = create({ title: "note2" });
     // .then((documentId) => router.push(`/documents/${documentId}`));
 
     toast.promise(promise, {

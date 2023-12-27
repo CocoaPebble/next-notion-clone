@@ -1,20 +1,36 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react";
-import { usePathname } from "next/navigation";
+import {
+  ChevronsLeft,
+  MenuIcon,
+  Plus,
+  PlusCircle,
+  Search,
+  Settings,
+  Trash,
+} from "lucide-react";
+import { usePathname, useParams, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-
+// import { useSearch } from "@/hooks/use-search";
+// import { useSettings } from "@/hooks/use-settings";
 import { UserItem } from "./user-item";
 import { Item } from "./item";
-
+import { DocumentList } from "./document-lists";
+// import { TrashBox } from "./trash-box";
+// import { Navbar } from "./navbar";
 import { useQuery, useMutation } from "convex/react";
 import { toast } from "sonner";
 import { api } from "@/convex/_generated/api";
 
 export const Navigation = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  // const search = useSearch();
+  // const settings = useSettings();
+  const params = useParams();
+
   const isMobile = useMediaQuery("(max-width: 768px)");
   const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
@@ -128,7 +144,9 @@ export const Navigation = () => {
         {/* User profile component */}
         <div>
           <UserItem />
-          <Item onClick={handleCreate} label="New Page" icon={PlusCircle} />
+          <Item label="Search" icon={Search} isSearch onClick={() => console.log('search')} />
+          <Item label="Settings" icon={Settings} onClick={() => console.log('setting')} />
+          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
 
         {/* Created documents list */}
