@@ -121,7 +121,7 @@ export const Navigation = () => {
   };
 
   return (
-    <div>
+    <>
       <aside
         ref={sidebarRef}
         className={cn(
@@ -144,16 +144,27 @@ export const Navigation = () => {
         {/* User profile component */}
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={() => console.log('search')} />
-          <Item label="Settings" icon={Settings} onClick={() => console.log('setting')} />
+          <Item
+            label="Search"
+            icon={Search}
+            isSearch
+            onClick={() => console.log("search")}
+          />
+          <Item
+            label="Settings"
+            icon={Settings}
+            onClick={() => console.log("setting")}
+          />
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
 
         {/* Created documents list */}
         <div className="mt-4">
-          {documents?.map((document) => (
+          {/* {documents?.map((document) => (
             <p key={document._id}>{document.title}</p>
-          ))}
+          ))} */}
+          <DocumentList />
+          <Item onClick={handleCreate} label="New page" icon={Plus} />
         </div>
 
         <div
@@ -181,6 +192,6 @@ export const Navigation = () => {
           )}
         </nav>
       </div>
-    </div>
+    </>
   );
 };
