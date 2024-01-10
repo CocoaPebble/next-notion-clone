@@ -1,5 +1,9 @@
-"use client";
+const DocumentIdPage = () => {
+  return (
+    <div>
+      DocumentId
+    </div>
+  )
+};
 
-function documentTemplate() {
-  return <div>document by id</div>;
-}
+export default DocumentIdPage;

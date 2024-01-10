@@ -39,7 +39,7 @@ export const DocumentList = ({
   const onRedirect = (documentId: string) => {
     console.log("redirecting to", documentId);
     
-    // router.push(`/documents/${documentId}`);
+    router.push(`/documents/${documentId}`);
   };
 
   if (documents === undefined) {
