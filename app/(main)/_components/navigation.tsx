@@ -13,7 +13,7 @@ import {
 import { usePathname, useParams, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-// import { useSearch } from "@/hooks/use-search";
+import { useSearch } from "@/hooks/use-search";
 // import { useSettings } from "@/hooks/use-settings";
 
 import {
@@ -33,7 +33,7 @@ import { api } from "@/convex/_generated/api";
 export const Navigation = () => {
   const pathname = usePathname();
   const router = useRouter();
-  // const search = useSearch();
+  const search = useSearch();
   // const settings = useSettings();
   const params = useParams();
 
@@ -147,14 +147,13 @@ export const Navigation = () => {
           <ChevronsLeft className="w-6 h-6" />
         </div>
 
-        {/* User profile component */}
         <div>
           <UserItem />
           <Item
             label="Search"
             icon={Search}
             isSearch
-            onClick={() => console.log("search")}
+            onClick={search.onOpen}
           />
           <Item
             label="Settings"
