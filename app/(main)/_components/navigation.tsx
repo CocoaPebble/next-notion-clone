@@ -15,10 +15,16 @@ import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 // import { useSearch } from "@/hooks/use-search";
 // import { useSettings } from "@/hooks/use-settings";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { UserItem } from "./user-item";
 import { Item } from "./item";
 import { DocumentList } from "./document-lists";
-// import { TrashBox } from "./trash-box";
+import { TrashBox } from "./trash-box";
 // import { Navbar } from "./navbar";
 import { useQuery, useMutation } from "convex/react";
 import { toast } from "sonner";
@@ -160,11 +166,19 @@ export const Navigation = () => {
 
         {/* Created documents list */}
         <div className="mt-4">
-          {/* {documents?.map((document) => (
-            <p key={document._id}>{document.title}</p>
-          ))} */}
           <DocumentList />
           <Item onClick={handleCreate} label="New page" icon={Plus} />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item label="Trash" icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              side={isMobile ? "bottom" : "right"}
+              className="p-0 w-72"
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div

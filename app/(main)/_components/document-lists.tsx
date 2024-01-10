@@ -37,7 +37,9 @@ export const DocumentList = ({
   });
 
   const onRedirect = (documentId: string) => {
-    router.push(`/documents/${documentId}`);
+    console.log("redirecting to", documentId);
+    
+    // router.push(`/documents/${documentId}`);
   };
 
   if (documents === undefined) {
@@ -61,7 +63,7 @@ export const DocumentList = ({
           paddingLeft: level ? `${level * 12 + 25}px` : undefined,
         }}
         className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80",
+          "hidden text-sm font-medium text-muted-foreground/80 ml-4",
           expanded && "last:block",
           level === 0 && "hidden"
         )}

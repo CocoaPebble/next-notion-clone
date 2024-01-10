@@ -215,9 +215,9 @@ export const update = mutation({
   },
 });
 
-
 export const removeIcon = mutation({
-  args: { id: v.id("documents") }, handler: async (ctx, args) => {
+  args: { id: v.id("documents") },
+  handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("User not authenticated");
 
@@ -231,11 +231,12 @@ export const removeIcon = mutation({
     const document = await ctx.db.patch(args.id, { icon: undefined });
 
     return document;
-  }
+  },
 });
 
 export const removeCoverImage = mutation({
-  args: { id: v.id("documents") }, handler: async (ctx, args) => {
+  args: { id: v.id("documents") },
+  handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("User not authenticated");
 
@@ -249,5 +250,5 @@ export const removeCoverImage = mutation({
     const document = await ctx.db.patch(args.id, { coverImage: undefined });
 
     return document;
-  }
+  },
 });
