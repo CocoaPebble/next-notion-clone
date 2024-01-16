@@ -5,14 +5,12 @@ export default defineSchema({
   documents: defineTable({
     title: v.string(),
     userId: v.string(),
-    content: v.optional(v.string()),
-
+    isArchived: v.boolean(),
     parentDocument: v.optional(v.id("documents")),
+    content: v.optional(v.string()),
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
-
-    isArchived: v.optional(v.boolean()),
-    isPublished: v.optional(v.boolean()),
+    isPublished: v.boolean(),
   })
     .index("by_user", ["userId"])
     .index("by_user_parent", ["userId", "parentDocument"]),

@@ -1,11 +1,12 @@
 "use client";
 
-import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
-import { useMutation } from "convex/react";
-import { Toaster, toast } from "sonner";
-import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
+import { MoreHorizontal, Trash } from "lucide-react";
+
+import { Id } from "@/convex/_generated/dataModel";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MenuIcon, MoreHorizontal, Trash } from "lucide-react";
+import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -24,14 +25,18 @@ interface MenuProps {
 export const Menu = ({ documentId }: MenuProps) => {
   const router = useRouter();
   const { user } = useUser();
+
   const archive = useMutation(api.documents.archive);
+
   const onArchive = () => {
     const promise = archive({ id: documentId });
+
     toast.promise(promise, {
-      loading: "Archiving...",
-      success: "Document archived!",
-      error: "Error archiving document",
+      loading: "Moving to trash...",
+      success: "Note moved to trash!",
+      error: "Failed to archive note.",
     });
+
     router.push("/documents");
   };
 
@@ -39,7 +44,7 @@ export const Menu = ({ documentId }: MenuProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="ghost">
-          <MoreHorizontal className="h-6 w-6" />
+          <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
