@@ -6,6 +6,7 @@ import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default function RootLayout({
             </ThemeProvider>
           </EdgeStoreProvider>
         </ConvexClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
